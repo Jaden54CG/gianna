@@ -109,46 +109,26 @@ body {
   30%, 50%, 70% { transform: translateX(-9px); } 40%, 60% { transform: translateX(9px); }
 }
 
-/* ---------- TV host ---------- */
-.tv { width: min(250px, 62vw); margin: 0 auto .5rem; }
-.tv svg {
-  display: block; width: 100%; height: auto; overflow: visible;
-  --screen: #f2b84b; --glow: rgba(242,184,75,.55);
-  filter: drop-shadow(0 0 26px var(--glow));
-  animation: bob 4.2s ease-in-out infinite;
-}
-.tv svg[data-mood="smug"] { --screen: #f2b84b; --glow: rgba(255,120,60,.55); }
-.tv svg[data-mood="angry"] { --screen: #e0243f; --glow: rgba(255,40,60,.8); }
-.tv svg[data-mood="sad"] { --screen: #6a93d6; --glow: rgba(90,130,220,.6); }
-.tv svg[data-mood="love"] { --screen: #ff86b1; --glow: rgba(255,110,170,.75); }
-.tv svg[data-mood="angry"] { animation: rage .14s linear infinite; }
-@keyframes rage {
-  0% { transform: translate(-3px, 1px) scale(1.12) rotate(-1.5deg); }
-  25% { transform: translate(3px, -2px) scale(1.14) rotate(1.5deg); }
-  50% { transform: translate(-2px, -1px) scale(1.12) rotate(-1deg); }
-  75% { transform: translate(2px, 2px) scale(1.15) rotate(1deg); }
-  100% { transform: translate(-3px, 1px) scale(1.12) rotate(-1.5deg); }
-}
-.scr { fill: var(--screen); transition: fill .5s; }
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-.m { opacity: 0; transition: opacity .3s; }
-svg[data-mood="happy"] .m-happy,
-svg[data-mood="smug"] .m-smug,
-svg[data-mood="angry"] .m-angry,
-svg[data-mood="sad"] .m-sad,
-svg[data-mood="love"] .m-love { opacity: 1; }
-.eye { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
-@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
-.ant { transform-box: fill-box; transform-origin: 50% 100%; animation: wig 3s ease-in-out infinite; }
-.ant.b { animation-delay: -1.3s; }
-@keyframes wig { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
-.static { opacity: 0; transition: opacity .2s; mix-blend-mode: screen; }
-svg[data-mood="angry"] .static { opacity: .55; }
-.tear { animation: tear 1.7s ease-in infinite; }
-.tear.b { animation-delay: -.8s; }
-@keyframes tear { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(34px); opacity: 0; } }
-.pulse { transform-box: fill-box; transform-origin: center; animation: pulse .8s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+/* ---------- Vox photo TV ---------- */
+.tv { width: min(330px, 76vw); margin: -1.2rem auto .35rem; position:relative; }
+.vox-photo-tv { filter: drop-shadow(0 0 28px rgba(49,243,242,.48)); animation: voxBob 4.2s ease-in-out infinite; }
+.vox-photo-screen { position:relative; width:100%; aspect-ratio:1.48/1; overflow:hidden; background:#060817; border:9px solid #050509; outline:2px solid #31f3f2; box-shadow:0 0 0 4px #160b22,0 0 35px rgba(49,243,242,.4),inset 0 0 35px rgba(0,0,0,.8); }
+.vox-photo-screen::before { content:""; position:absolute; inset:0; z-index:5; pointer-events:none; background:linear-gradient(120deg,rgba(255,255,255,.11),transparent 24%,transparent 70%,rgba(255,4,75,.08)); mix-blend-mode:screen; }
+.vox-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .12s ease,filter .12s ease; }
+.vox-normal-1 { animation:voxPhotoCycle 9s infinite; }
+.vox-normal-2 { animation:voxPhotoCycle 9s 3s infinite; }
+.vox-normal-3 { animation:voxPhotoCycle 9s 6s infinite; }
+.vox-angry { opacity:0; z-index:3; }
+.vox-scanlines { position:absolute; inset:0; z-index:6; pointer-events:none; background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0,rgba(0,0,0,.18) 2px,transparent 2px,transparent 5px); mix-blend-mode:multiply; }
+.vox-glitch { position:absolute; inset:0; z-index:7; pointer-events:none; opacity:.12; background:linear-gradient(90deg,transparent 0 18%,#31f3f2 18% 19%,transparent 19% 63%,#ff044b 63% 64%,transparent 64%); animation:voxGlitch 1.7s steps(2,end) infinite; }
+@keyframes voxBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+@keyframes voxPhotoCycle { 0%,27%{opacity:1} 33%,100%{opacity:0} }
+@keyframes voxGlitch { 0%,86%,100%{transform:translateX(0)} 88%{transform:translateX(-4px)} 90%{transform:translateX(5px)} 92%{transform:translateX(-2px)} }
+.tv svg { display:none; }
+.vox-photo-tv[data-mood="angry"] .vox-normal { opacity:0 !important; animation:none; }
+.vox-photo-tv[data-mood="angry"] .vox-angry { opacity:1; filter:saturate(1.35) contrast(1.08); animation:voxRage .14s linear infinite; }
+.vox-photo-tv[data-mood="angry"] .vox-photo-screen { outline-color:#ff044b; box-shadow:0 0 0 4px #160b22,0 0 42px rgba(255,4,75,.75),inset 0 0 35px rgba(0,0,0,.8); }
+@keyframes voxRage { 0%{transform:translate(0,0) scale(1)} 25%{transform:translate(-3px,1px) scale(1.015)} 50%{transform:translate(3px,-1px) scale(1.02)} 75%{transform:translate(-2px,0) scale(1.01)} 100%{transform:translate(0,0) scale(1)} }
 
 /* ---------- progress ---------- */
 .progress { display: flex; justify-content: center; gap: .9rem; margin: .6rem 0 1.1rem; }
@@ -288,7 +268,7 @@ html{color-scheme:dark}body{margin:0}[hidden]{display:none!important}img{max-wid
 
 <main class="wrap">
   <header class="mast">
-    <div class="sign">Hotel Inferno &middot; Now checking in</div>
+    <div class="sign">Hazbin Hotel &middot; Now checking in</div>
     <p class="eyebrow">A hellish inquiry for</p>
     <h1 class="name">Gianna</h1>
     <div class="rule" aria-hidden="true"><i></i></div>
@@ -298,74 +278,15 @@ html{color-scheme:dark}body{margin:0}[hidden]{display:none!important}img{max-wid
     <div class="bulbs" aria-hidden="true"></div>
     <div class="hearts" id="hearts" aria-hidden="true"></div>
 
-    <div class="tv">
-      <svg id="tv" data-mood="happy" viewBox="0 0 260 235" role="img" aria-label="A retro TV host with an expressive screen face">
-        <defs>
-          <clipPath id="scr"><rect x="36" y="60" width="188" height="134" rx="22"/></clipPath>
-          <pattern id="sl" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1.6" fill="#000"/></pattern>
-          <filter id="nz" x="0" y="0" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8 0.9" numOctaves="1" result="n">
-              <animate attributeName="baseFrequency" values="0.8 0.9;0.5 1.2;0.95 0.6;0.7 1" dur="0.4s" calcMode="discrete" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feColorMatrix type="saturate" values="0"/>
-          </filter>
-          <path id="hrt" d="M0 9 C-20 -6 -13 -22 0 -11 C13 -22 20 -6 0 9Z"/>
-        </defs>
-
-        <g class="ant"><line x1="130" y1="50" x2="92" y2="8" stroke="#e8c26a" stroke-width="4" stroke-linecap="round"/><circle cx="92" cy="8" r="6" fill="#e8c26a"/></g>
-        <g class="ant b"><line x1="130" y1="50" x2="168" y2="8" stroke="#e8c26a" stroke-width="4" stroke-linecap="round"/><circle cx="168" cy="8" r="6" fill="#e8c26a"/></g>
-
-        <rect x="22" y="212" width="34" height="10" rx="3" fill="#e8c26a"/>
-        <rect x="204" y="212" width="34" height="10" rx="3" fill="#e8c26a"/>
-        <rect x="18" y="46" width="224" height="170" rx="32" fill="#17040a" stroke="#e8c26a" stroke-width="4"/>
-        <rect x="28" y="54" width="204" height="154" rx="26" fill="none" stroke="#b3122b" stroke-width="2"/>
-
-        <rect class="scr" x="36" y="60" width="188" height="134" rx="22"/>
-
-        <g clip-path="url(#scr)">
-          <!-- happy -->
-          <g class="m m-happy" fill="none" stroke="#1a0509" stroke-linecap="round">
-            <ellipse class="eye" cx="98" cy="112" rx="9" ry="12" fill="#1a0509" stroke="none"/>
-            <ellipse class="eye" cx="162" cy="112" rx="9" ry="12" fill="#1a0509" stroke="none"/>
-            <path d="M92 146 Q130 182 168 146" stroke-width="7"/>
-          </g>
-          <!-- smug -->
-          <g class="m m-smug" fill="none" stroke="#1a0509" stroke-linecap="round">
-            <path d="M80 94 L116 90" stroke-width="6"/>
-            <path d="M144 80 L180 92" stroke-width="6"/>
-            <ellipse class="eye" cx="98" cy="112" rx="9" ry="10" fill="#1a0509" stroke="none"/>
-            <ellipse class="eye" cx="162" cy="112" rx="9" ry="10" fill="#1a0509" stroke="none"/>
-            <path d="M98 156 Q136 162 166 140" stroke-width="7"/>
-          </g>
-          <!-- angry -->
-          <g class="m m-angry" fill="none" stroke="#1a0509" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M80 90 L118 108" stroke-width="7"/>
-            <path d="M180 90 L142 108" stroke-width="7"/>
-            <circle cx="100" cy="122" r="7" fill="#1a0509" stroke="none"/>
-            <circle cx="160" cy="122" r="7" fill="#1a0509" stroke="none"/>
-            <path d="M92 164 L108 148 L124 164 L140 148 L156 164 L168 150" stroke-width="7"/>
-          </g>
-          <!-- sad -->
-          <g class="m m-sad" fill="none" stroke="#0e1a33" stroke-linecap="round">
-            <path d="M80 104 L116 90" stroke-width="6"/>
-            <path d="M180 104 L144 90" stroke-width="6"/>
-            <ellipse class="eye" cx="98" cy="118" rx="9" ry="12" fill="#0e1a33" stroke="none"/>
-            <ellipse class="eye" cx="162" cy="118" rx="9" ry="12" fill="#0e1a33" stroke="none"/>
-            <path d="M98 166 Q130 138 162 166" stroke-width="7"/>
-            <ellipse class="tear" cx="92" cy="136" rx="4" ry="7" fill="#e4f1ff" stroke="none"/>
-            <ellipse class="tear b" cx="168" cy="136" rx="4" ry="7" fill="#e4f1ff" stroke="none"/>
-          </g>
-          <!-- love -->
-          <g class="m m-love" stroke="none">
-            <use class="pulse" href="#hrt" x="98" y="112" fill="#b0124d" transform-origin="98 112"/>
-            <use class="pulse" href="#hrt" x="162" y="112" fill="#b0124d"/>
-            <path d="M92 142 Q130 196 168 142 Z" fill="#4a0420"/>
-          </g>
-          <rect class="static" x="36" y="60" width="188" height="134" filter="url(#nz)"/>
-          <rect x="36" y="60" width="188" height="134" fill="url(#sl)" opacity=".16"/>
-          <ellipse cx="82" cy="78" rx="42" ry="12" fill="#fff" opacity=".18" transform="rotate(-12 82 78)"/>
-        </g>
-      </svg>
+    <div class="tv vox-photo-tv" data-mood="happy" aria-label="Vox from Hazbin Hotel">
+      <div class="vox-photo-screen" id="voxPhotoScreen">
+        <img class="vox-photo vox-normal vox-normal-1" src="https://www.thepopverse.com/_next/image?q=75&url=https%3A%2F%2Fmedia.thepopverse.com%2Fmedia%2Fvox-hazbin-hotel-2n2dbnf2zyce5iip5sphzlucwq.jpg&w=1280" alt="Vox from Hazbin Hotel" loading="eager">
+        <img class="vox-photo vox-normal vox-normal-2" src="https://statico.soapcentral.com/editor/2025/12/f7e71-17648389684727.jpg" alt="Vox from Hazbin Hotel" loading="lazy">
+        <img class="vox-photo vox-normal vox-normal-3" src="https://sp-ao.shortpixel.ai/client/to_auto%2Cq_glossy%2Cret_img%2Cw_1024%2Ch_556/https%3A/www.novagulp.it/wp-content/uploads/2024/02/Hazbin-Hotel-Top-10-Personaggi-Voxsting-how-vox-doesnt-have-a-static-voice-v0-kc7oz3v3jk6c1-1024x556.webp" alt="Vox from Hazbin Hotel" loading="lazy">
+        <img class="vox-photo vox-angry" src="https://pbs.twimg.com/media/G6G5h85XoAAP248.jpg" alt="Angry Vox from Hazbin Hotel" loading="lazy">
+        <div class="vox-scanlines" aria-hidden="true"></div>
+        <div class="vox-glitch" aria-hidden="true"></div>
+      </div>
     </div>
 
     <div class="progress" id="progress" aria-hidden="true">
@@ -484,7 +405,7 @@ html{color-scheme:dark}body{margin:0}[hidden]{display:none!important}img{max-wid
     Array.prototype.forEach.call(document.querySelectorAll(".screen"), function (s) {
       var on = s.id === id; s.hidden = !on; s.classList.toggle("in", on);
     });
-    tv.setAttribute("data-mood", mood);
+    document.querySelector(".vox-photo-tv").setAttribute("data-mood", mood);
     var i = order.indexOf(id);
     progress.hidden = i < 0;
     pips.forEach(function (p, n) { p.classList.toggle("done", i >= 0 && n <= i); });
