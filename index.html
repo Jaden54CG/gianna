@@ -2886,7 +2886,7 @@ img {
     if (name === "letters") { spawnHearts($("#lhearts")); } else { $("#lhearts").innerHTML = ""; }
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) {
+  Array.prototype.forEach.call(document.querySelectorAll(".tab[data-go]"), function (t) {
     t.addEventListener("click", function () {
       var n = t.getAttribute("data-go");
       if (location.hash.slice(1) === n) { show(n); } else { location.hash = n; }
