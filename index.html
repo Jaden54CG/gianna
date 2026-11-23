@@ -453,26 +453,43 @@ img{max-width:100%}
     punishment.hidden = false;
   }
 
-  /* ---------- YouTube music ---------- */
+  /* ---------- YouTube music (only the two songs coded below) ---------- */
 
+  var BG_ID = "PMfvWTS6PXc";
+  var YES_ID = "0BEt1xCSBG0";
   var bgPlayer = null, yesPlayer = null, ytReady = false, musicOn = false, userMuted = false;
+  var curTab = "quiz";
+  var tapped = false;
 
   window.onYouTubeIframeAPIReady = function () {
     bgPlayer = new YT.Player("bgMusic", {
-      width: "1", height: "1", videoId: "PMfvWTS6PXc",
-      playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: "PMfvWTS6PXc", playsinline: 1, rel: 0 },
+      width: "1", height: "1", videoId: BG_ID,
+      playerVars: {
+        autoplay: 1, controls: 0, loop: 1, playlist: BG_ID, playsinline: 1,
+        rel: 0, fs: 0, disablekb: 1, iv_load_policy: 3, modestbranding: 1
+      },
       events: {
         onReady: function (event) {
           ytReady = true;
           event.target.mute();
           event.target.playVideo();
-        }
+          if (musicOn && curTab !== "playlist") { event.target.unMute(); }
+        },
+        onStateChange: function (event) {
+          /* when the song ends, replay the same song and never anything else */
+          if (event.data === 0) {
+            event.target.seekTo(0, true);
+            if (musicOn) { event.target.playVideo(); }
+          }
+        },
+        onError: function () { /* stay silent instead of playing something else */ }
       }
     });
   };
 
-  function unlockBackgroundMusic() {
+  function unlockBackgroundMusic(force) {
     if (userMuted) { return; }
+    if (curTab === "playlist" && force !== true) { return; }
     musicOn = true;
     paintMusic();
     if (!bgPlayer || !ytReady) { return; }
@@ -489,18 +506,41 @@ img{max-width:100%}
 
   function playYesSong() {
     if (!window.YT || !YT.Player) { return; }
-    if (yesPlayer) { try { yesPlayer.destroy(); } catch (e) {} }
+    if (yesPlayer) { try { yesPlayer.destroy(); } catch (e) {} yesPlayer = null; }
+    resetYesHolder();
     yesPlayer = new YT.Player("yesMusic", {
-      width: "1", height: "1", videoId: "0BEt1xCSBG0",
-      playerVars: { autoplay: 1, controls: 0, playsinline: 1, rel: 0 },
+      width: "1", height: "1", videoId: YES_ID,
+      playerVars: {
+        autoplay: 1, controls: 0, playsinline: 1,
+        rel: 0, fs: 0, disablekb: 1, iv_load_policy: 3, modestbranding: 1
+      },
       events: {
         onReady: function (event) {
           event.target.unMute();
           event.target.setVolume(100);
           event.target.playVideo();
-        }
+        },
+        onStateChange: function (event) {
+          /* when the song ends, remove the player so nothing else can start */
+          if (event.data === 0) { setTimeout(stopYesSong, 50); }
+        },
+        onError: function () { stopYesSong(); }
       }
     });
+  }
+
+  function stopYesSong() {
+    if (yesPlayer) { try { yesPlayer.destroy(); } catch (e) {} yesPlayer = null; }
+    resetYesHolder();
+  }
+
+  var WHOLE_URL = "https://open.spotify.com/embed/playlist/5IOzTclBsEQHC4DDKp0zPN?utm_source=generator&theme=0";
+
+  function stopSpotify() {
+    var df = $("#dayframe"), sf = $("#sframe");
+    if (df.getAttribute("src") && df.getAttribute("src") !== "about:blank") { df.setAttribute("src", "about:blank"); }
+    if (sf.getAttribute("src") && sf.getAttribute("src") !== "about:blank") { sf.setAttribute("src", "about:blank"); }
+    $("#whole").open = false;
   }
 
   /* ---------- UI sounds ---------- */
@@ -708,13 +748,18 @@ img{max-width:100%}
 
   muteBtn.addEventListener("click", function () {
     if (musicOn) { userMuted = true; muteBackgroundMusic(); }
-    else { userMuted = false; unlockBackgroundMusic(); }
+    else { userMuted = false; unlockBackgroundMusic(true); }
   });
-  document.addEventListener("pointerdown", unlockBackgroundMusic, { once: true });
+
+  function firstTap() {
+    tapped = true;
+    document.removeEventListener("pointerdown", firstTap);
+    unlockBackgroundMusic();
+  }
+  document.addEventListener("pointerdown", firstTap);
 
   $("#restart").addEventListener("click", function () {
-    if (yesPlayer) { try { yesPlayer.destroy(); } catch (e) {} yesPlayer = null; }
-    resetYesHolder();
+    stopYesSong();
   });
   paintMusic();
 
@@ -731,12 +776,29 @@ img{max-width:100%}
     });
     var panel = $("#p-" + name);
     void panel.offsetWidth; panel.classList.add("in");
+
+    curTab = name;
+
+    /* stop anything that belongs to a tab we just left */
+    if (name !== "quiz") { stopYesSong(); }
+    if (name !== "game") {
+      var gf = $("#gframe");
+      if (gf.getAttribute("src") && gf.getAttribute("src") !== "about:blank") { gf.setAttribute("src", "about:blank"); }
+    }
+    if (name !== "playlist") { stopSpotify(); }
+
     if (name === "game") { pickGame(curGame); }
+
     if (name === "playlist") {
       var df = $("#dayframe");
-      if (!df.getAttribute("src") && df.getAttribute("data-src")) { df.setAttribute("src", df.getAttribute("data-src")); }
+      if (df.getAttribute("data-src") && df.getAttribute("src") !== df.getAttribute("data-src")) {
+        df.setAttribute("src", df.getAttribute("data-src"));
+      }
       muteBackgroundMusic();
+    } else if (tapped && !userMuted && $("#love").hidden && $("#sad").hidden) {
+      unlockBackgroundMusic();
     }
+
     if (name === "letters") { spawnHearts($("#lhearts")); } else { $("#lhearts").innerHTML = ""; }
   }
 
@@ -1119,8 +1181,8 @@ img{max-width:100%}
   })();
   $("#whole").addEventListener("toggle", function () {
     var sf = $("#sframe");
-    if ($("#whole").open && !sf.getAttribute("src")) {
-      sf.setAttribute("src", "https://open.spotify.com/embed/playlist/5IOzTclBsEQHC4DDKp0zPN?utm_source=generator&theme=0");
+    if ($("#whole").open && sf.getAttribute("src") !== WHOLE_URL) {
+      sf.setAttribute("src", WHOLE_URL);
     }
   });
 
