@@ -38,16 +38,24 @@ const hh=n=>Math.abs(Math.sin(n*12.9898)*43758.5453)%1;
 function lock(x,y,len,w,a){X.save();X.translate(x,y);X.rotate(a);rr(-w/2,0,w,len,w*.5,'#16090e',O,2.5);X.save();X.beginPath();X.roundRect(-w/2,0,w,len,w*.5);X.clip();X.strokeStyle='rgba(175,145,160,.45)';X.lineWidth=2.2;for(let k=-w;k<len;k+=w*.42){X.beginPath();X.moveTo(-w/2,k+w*.5);X.lineTo(w/2,k);X.stroke()}X.fillStyle='rgba(255,255,255,.07)';X.fillRect(-w*.38,0,w*.2,len);X.restore();for(let i=0;i<5;i++)ci((i-2)*w*.2,len+(i%2)*2,w*.17,'#16090e',O,1.5);X.restore()}
 function me(x,y,r,heat,mo,t,bd){const sk=lc(['#8a5538','#b8442f'],heat),H1='#16090e';
 if(bd){rr(x-r*1.8,y+r*.8,r*3.6,r*3,r*.7,'#1c2236',O);rr(x-r*.34,y+r*.55,r*.68,r*.6,10,sk,O);X.beginPath();X.moveTo(x-r*.5,y+r*.85);X.lineTo(x,y+r*1.9);X.lineTo(x+r*.5,y+r*.85);X.closePath();pa('#4a2c24',O,2);rr(x-r*.85,y+r*.7,r*.5,r*.55,8,'#262d44',O,2);rr(x+r*.35,y+r*.7,r*.5,r*.55,8,'#262d44',O,2);X.beginPath();X.moveTo(x,y+r*1.9);X.lineTo(x,y+r*3.4);pa(0,'#0a0a10',3);X.beginPath();X.moveTo(x-r*.4,y+r*.9);X.quadraticCurveTo(x,y+r*1.55,x+r*.4,y+r*.9);pa(0,'#cfd6dd',2)}
-el(x,y-r*.25,r*1.45,r*1.25,H1,O);
-for(let d=-1;d<2;d+=2)for(let k=0;k<7;k++)lock(x+d*r*(1.0+k*.07),y-r*.6+k*r*.1,r*[1.0,1.15,1.05,.9,1.1,.8,.6][k],r*.29,-d*(.04+k*.03));
+/* back of the hair: compact rounded shape */
+el(x,y-r*.2,r*1.28,r*1.1,H1,O);
+/* short side locs hanging behind the face (ear to jaw length) */
+for(let d=-1;d<2;d+=2)for(let k=0;k<4;k++)lock(x+d*r*(.98+k*.05),y-r*.35+k*r*.12,r*[.8,.9,.75,.55][k],r*.25,-d*(.03+k*.04));
+/* face */
 ci(x,y,r,sk,O);ci(x+r*1.01,y+r*.32,r*.05,'#e8eef4');
 [-1,1].forEach(d=>{if(heat>.6){X.beginPath();X.moveTo(x+d*r*.4-9,y-r*.02);X.lineTo(x+d*r*.4+9,y+r*.04);pa(0,O,3)}else{el(x+d*r*.4,y,r*.17,r*.11,'#fff',O,0,2);ci(x+d*r*.4,y,r*.08,'#3a2018');ci(x+d*r*.4+2,y-2,r*.025,'#fff')}X.beginPath();X.moveTo(x+d*r*.4-r*.2,y-r*.2-d*heat*6);X.lineTo(x+d*r*.4+r*.2,y-r*.2+d*heat*6);pa(0,O,5.5)});
 X.beginPath();X.moveTo(x-r*.1,y+r*.28);X.quadraticCurveTo(x,y+r*.37,x+r*.1,y+r*.28);pa(0,'rgba(42,10,16,.7)',3);el(x,y+r*.6,r*.24+mo*r*.05,r*.09+mo*r*.17,mo>.1?'#6a1620':'#b8605a',O,0,2);
-for(let i=0;i<17;i++){const a=Math.PI+i*Math.PI/16;ci(x+Math.cos(a)*r*1.17,y-r*.2+Math.sin(a)*r*1.12,r*.27,H1,O,2.5)}
-X.beginPath();X.moveTo(x-r*1.2,y-r*.2);X.arc(x,y-r*.2,r*1.2,Math.PI,TAU);X.quadraticCurveTo(x,y-r*.72,x-r*1.2,y-r*.2);pa(H1);
-for(let i=0;i<80;i++){const px=x+(hh(i)-.5)*r*2.4,py=y-r*.2-hh(i+50)*r*1.2;if(Math.hypot((px-x)/(r*1.2),(py-y+r*.2)/(r*1.15))<.95&&py<y-r*.5){X.beginPath();X.arc(px,py,r*.06,hh(i)*6,hh(i)*6+4.6);pa(0,'#45303a',1.8)}}
-for(let d=-1;d<2;d+=2)for(let k=0;k<3;k++)lock(x+d*r*(.98+k*.1),y-r*.5+k*r*.12,r*[.75,.95,.7][k],r*.27,-d*(.06+k*.05));
-[.45,.5,.65,.95,.55,.4].forEach((l,i)=>lock(x+(i-2.5)*r*.25,y-r*.6,r*l,r*.27,(hh(i+9)-.5)*.12));
+/* bumpy twist outline around the top of the head */
+for(let i=0;i<15;i++){const a=Math.PI*1.02+i*Math.PI*.96/14,q=1.1+(hh(i+3)-.5)*.1;ci(x+Math.cos(a)*r*q,y-r*.2+Math.sin(a)*r*q*.98,r*.2,H1,O,2.2)}
+/* hair cap with hairline */
+X.beginPath();X.moveTo(x-r*1.12,y-r*.2);X.arc(x,y-r*.2,r*1.12,Math.PI,TAU);X.quadraticCurveTo(x,y-r*.72,x-r*1.12,y-r*.2);pa(H1);
+/* little twist coils on top */
+for(let i=0;i<70;i++){const px=x+(hh(i)-.5)*r*2.2,py=y-r*.2-hh(i+50)*r*1.1;if(Math.hypot((px-x)/(r*1.1),(py-y+r*.2)/(r*1.05))<.92&&py<y-r*.58){X.beginPath();X.arc(px,py,r*.055,hh(i)*6,hh(i)*6+4.6);pa(0,'#45303a',1.6)}}
+/* short locs at the temples, in front of the ears */
+for(let d=-1;d<2;d+=2)for(let k=0;k<2;k++)lock(x+d*r*(.92+k*.08),y-r*.52+k*r*.1,r*[.55,.42][k],r*.23,-d*(.08+k*.06));
+/* fringe: short locs falling over the forehead, swept to both sides of the part */
+for(let i=0;i<7;i++){const o=i-3;lock(x+o*r*.28,y-r*.78+Math.abs(o)*r*.03,r*(.36+Math.abs(o)*.04+hh(i+9)*.05),r*.24,-o*.09)}
 if(heat>.5)for(let k=0;k<2;k++)[-1,1].forEach(d=>ci(x+d*r*.66,y+r*.1+((t*60+k*30+d*10)%50),3,'#7fd0ff'))}
 /* shared state */
 const FL=[{n:'Atomic',c:'#e0161f'},{n:'Lemon Pepper',c:'#f4dc3c'},{n:'Original Hot',c:'#e8541c'},{n:'Mango Habanero',c:'#f5a21c'},{n:'Garlic Parmesan',c:'#efe3b8'},{n:'Hickory BBQ',c:'#7a4120'}];
