@@ -51,8 +51,9 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 150px;
+  max-height: 170px;
   object-fit: contain;
+  object-position: bottom center;
   animation: bob 3.4s ease-in-out infinite;
 }
 @keyframes slidein { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
@@ -218,35 +219,35 @@ body {
   var CUSTOMERS = [
     {
       n: "Charlie Morningstar",
-      img: "https://static.wikia.nocookie.net/shojo-heroes/images/8/87/Charlie_Morningstar_render.png/revision/latest?cb=20240402150351"
+      img: "https://64.media.tumblr.com/5799ffd9f991275217a2294814db6c81/642f717a618ddd62-2f/s540x810/12da3b2868bce8108e695ce9227488a4226a6012.pnj"
     },
     {
       n: "Vaggie",
-      img: "https://ik.imagekit.io/x2dirkim6/images/avatars/characters/character_avatar_tPcq9KUB0.webp?tr=w-3840"
+      img: "https://64.media.tumblr.com/b578d2ae514b49be28e685e894eef425/642f717a618ddd62-b1/s540x810/d3416a989a72c186c0e22d93c03163effeda55bc.pnj"
     },
     {
       n: "Angel Dust",
-      img: "https://dihulvhqvmoxyhkxovko.supabase.co/storage/v1/object/public/husbando-land/37e1209c-3490-4648-9b68-a50de4aaac79/2024-08-21/c0daa407-56fe-41f6-92cc-4ec43c228cb9.png"
+      img: "https://64.media.tumblr.com/9c53f22450348aee27a50f38215a9abb/642f717a618ddd62-ba/s540x810/5a8295f8c3e41debbb210b88729d0eb663b43644.pnj"
     },
     {
       n: "Alastor",
-      img: "https://www.vhv.rs/dpng/d/332-3328432_hazbin-hotel-wiki-alastor-from-hazbin-hotel-hd.png"
+      img: "https://64.media.tumblr.com/c5448a658baaf55db6e570e48317214d/642f717a618ddd62-f4/s540x810/2e5ec00b9dcd306b830485251b9581189a93780b.pnj"
     },
     {
       n: "Husk",
-      img: "https://static.wikia.nocookie.net/the-rp-crew/images/3/33/Husk_Show_Design.png/revision/latest/scale-to-width-down/1200?cb=20221102202528"
+      img: "https://64.media.tumblr.com/4bd56b0746569e779b7e59ff0666fd6f/642f717a618ddd62-35/s540x810/4dd565cdce77c6983b0621c8ead3f5c225a00293.pnj"
     },
     {
       n: "Niffty",
-      img: "https://ami.animecharactersdatabase.com/uploads/chars/87561-473289241.png"
+      img: "https://64.media.tumblr.com/b2a6add338923bc5a07ef570b88ddb91/642f717a618ddd62-80/s540x810/89277db5c07c44c2a96d6cd99417301dade2d441.pnj"
     },
     {
       n: "Vox",
-      img: "https://static.wikia.nocookie.net/hazbin-hotel-dawn-of-the-darkness/images/9/93/Vox_by_savvysketches03.png/revision/latest?cb=20251115194126"
+      img: "https://64.media.tumblr.com/b6c743d978c8e9f5d46bb213b8c62c90/642f717a618ddd62-3d/s540x810/9a1cb5651caefacce5308059e552766e1e569538.pnj"
     },
     {
       n: "Cherri Bomb",
-      img: "https://image.pngaaa.com/176/6847176-middle.png"
+      img: "https://64.media.tumblr.com/40127f17e9ca016e214f6864ab26ebf1/642f717a618ddd62-92/s540x810/4ef16e66ca897b18be1a2ca64e3eadc476c4c34b.pnj"
     }
   ];
 
@@ -296,7 +297,7 @@ body {
 
   /* ---------- customers ---------- */
   function customerSVG(c, mood) {
-    return '<img src="' + c.img + '" alt="' + c.n + '" class="hazbin-customer">';
+    return '<img src="' + c.img + '" alt="' + c.n + '" class="hazbin-customer" referrerpolicy="no-referrer">';
   }
 
   function setCust(sel, c, mood) {
@@ -343,10 +344,6 @@ body {
     var parts = o.tops.map(function (k) {
       return nameOf(TOPS, k).toLowerCase();
     });
-
-    if (o.sauce !== "none") {
-      parts.push("a " + nameOf(SAUCES, o.sauce).toLowerCase() + " drizzle");
-    }
 
     var list = parts.length > 1
       ? parts.slice(0, -1).join(", ") + " and " + parts[parts.length - 1]
