@@ -14,6 +14,7 @@
   --font-body: "Josefin Sans", "Helvetica Neue", Arial, sans-serif;
   color-scheme: dark;
 }
+
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; min-height: 100%; }
@@ -23,6 +24,7 @@ body {
   background-repeat: no-repeat; background-attachment: fixed;
   color: var(--bone); font-family: var(--font-body); font-size: 16px; line-height: 1.45;
 }
+
 .app { max-width: 540px; margin: 0 auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
 .hud { display: flex; gap: 8px; }
 .stat { flex: 1; text-align: center; padding: .4rem .3rem; border: 1px solid rgba(232,194,106,.6); background: rgba(10,4,7,.7); }
@@ -33,11 +35,13 @@ body {
   background: linear-gradient(180deg, rgba(43,8,17,.86), rgba(14,3,7,.92));
   border: 2px solid var(--gold); box-shadow: 0 0 40px rgba(179,18,43,.35), inset 0 0 40px rgba(0,0,0,.55);
 }
+
 .sign {
   display: inline-block; padding: .45rem 1rem; border: 2px solid #ff5fa2; border-radius: 3px; color: #ffd6e8;
   font-weight: 700; font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; text-shadow: 0 0 8px #ff5fa2;
   box-shadow: 0 0 16px rgba(255,95,162,.55), inset 0 0 12px rgba(255,95,162,.3); animation: flick 6s infinite;
 }
+
 @keyframes flick { 0%, 18%, 22%, 62%, 66%, 100% { opacity: 1; } 20% { opacity: .55; } 64% { opacity: .7; } }
 .title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 10vw, 3rem); line-height: 1.05; color: #ffe9ee; text-shadow: 0 0 6px #ff6b7d, 0 0 22px var(--ember), 0 0 44px var(--blood); }
 .sub { margin: 0; max-width: 36ch; color: rgba(246,235,221,.82); font-weight: 300; font-size: 1.02rem; }
@@ -51,10 +55,12 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 150px;
+  max-height: 170px;
   object-fit: contain;
+  object-position: bottom center;
   animation: bob 3.4s ease-in-out infinite;
 }
+
 @keyframes slidein { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
@@ -63,15 +69,18 @@ body {
   background: #f6ebdd; color: #2a0b14; padding: .8rem .95rem; border: 2px solid var(--gold); border-radius: 14px;
   font-weight: 600; font-size: 1.05rem; line-height: 1.35; box-shadow: 0 6px 18px rgba(0,0,0,.5); min-height: 4.6rem;
 }
+
 .bubble.sm { font-size: .88rem; min-height: 0; padding: .55rem .7rem; }
 .bubble::before {
   content: ""; position: absolute; left: -11px; bottom: 20px; width: 0; height: 0;
   border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 11px solid var(--gold);
 }
+
 .bubble::after {
   content: ""; position: absolute; left: -7px; bottom: 21px; width: 0; height: 0;
   border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 9px solid #f6ebdd;
 }
+
 .counter { width: 100%; height: 14px; margin-top: -.9rem; background: linear-gradient(180deg, var(--gold), #a9842f); box-shadow: 0 0 18px rgba(232,194,106,.5); border-radius: 2px; }
 .cname { margin: -.4rem 0 0; font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
 
@@ -83,6 +92,7 @@ body {
   padding: 1rem 1.5rem; border: 2px solid var(--gold); border-radius: 2px; color: var(--bone); background: transparent;
   transition: transform .2s, background .2s;
 }
+
 .btn:hover { transform: translateY(-2px); }
 .btn:focus-visible, .chip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .btn.yes { background: linear-gradient(180deg, var(--ember), var(--blood)); box-shadow: 0 0 22px rgba(255,61,79,.55); }
@@ -94,6 +104,7 @@ body {
   font: 600 .88rem/1.1 var(--font-body); letter-spacing: .04em; color: var(--bone);
   padding: .65rem .8rem; background: rgba(10,4,7,.7); border: 1px solid rgba(232,194,106,.6); border-radius: 2px;
 }
+
 .chip.on { background: linear-gradient(180deg, var(--ember), var(--blood)); border-color: var(--gold); box-shadow: 0 0 14px rgba(255,61,79,.55); }
 .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); flex: none; }
 .quip { margin: 0; min-height: 1.4em; color: var(--gold); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .78rem; }
@@ -218,7 +229,7 @@ body {
   var CUSTOMERS = [
     {
       n: "Charlie Morningstar",
-      img: "https://static.wikia.nocookie.net/shojo-heroes/images/8/87/Charlie_Morningstar_render.png/revision/latest?cb=20240402150351"
+      img: "https://img.favpng.com/16/5/16/charlie-morningstar-cheerful-cartoon-lady-in-red-suit-GAeC6AR4.jpg"
     },
     {
       n: "Vaggie",
@@ -226,7 +237,7 @@ body {
     },
     {
       n: "Angel Dust",
-      img: "https://dihulvhqvmoxyhkxovko.supabase.co/storage/v1/object/public/husbando-land/37e1209c-3490-4648-9b68-a50de4aaac79/2024-08-21/c0daa407-56fe-41f6-92cc-4ec43c228cb9.png"
+      img: "https://hazbinhotel.com/cdn/shop/files/episode-product-image-angeldust_1200x.png?v=1696615565"
     },
     {
       n: "Alastor",
@@ -234,11 +245,11 @@ body {
     },
     {
       n: "Husk",
-      img: "https://static.wikia.nocookie.net/the-rp-crew/images/3/33/Husk_Show_Design.png/revision/latest/scale-to-width-down/1200?cb=20221102202528"
+      img: "https://cosplaycodex.com/_next/image?q=75&url=https%3A%2F%2Fd2wpi04lurvinm.cloudfront.net%2Fmedia%2Fcharacter_images_public%2Fhusk_hazbin_hotel_1.jpg&w=2048"
     },
     {
       n: "Niffty",
-      img: "https://ami.animecharactersdatabase.com/uploads/chars/87561-473289241.png"
+      img: "https://image.pngaaa.com/726/6280726-middle.png"
     },
     {
       n: "Vox",
@@ -246,7 +257,7 @@ body {
     },
     {
       n: "Cherri Bomb",
-      img: "https://image.pngaaa.com/176/6847176-middle.png"
+      img: "https://static.wikia.nocookie.net/hazbinhotel/images/a/a5/Cherri_new_design_i_guess.png/revision/latest?cb=20240806125614"
     }
   ];
 
