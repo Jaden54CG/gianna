@@ -9,9 +9,14 @@
 // CHOOSE A DAY: add a line to SONG_PINS to force a specific song on a specific date.
 
 window.SONGS = [
-  { id: "3Kh7jZ6QdVJJq63A3xRneN", title: "Again & Again", artist: "The Bird and the Bee", cover: "https://i.scdn.co/image/ab67616d0000b273485396dfe12cd25c4f743873" },
+  {
+    id: "4yxUp64LKFWavI2eMjn67B",
+    title: "Nervy Funk",
+    artist: "DJ KVNXD, Dj Zidzz, BRTS7, DJ ALGUS ZL",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fd9ab575a2d75303c5e5456e"
+  },
 ];
 
 window.SONG_PINS = {
-  "2026-11-22": "3Kh7jZ6QdVJJq63A3xRneN",
+  "2026-11-23": "4yxUp64LKFWavI2eMjn67B",
 };
