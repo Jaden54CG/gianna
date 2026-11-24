@@ -10,13 +10,13 @@
 
 window.SONGS = [
   {
-    id: "4yxUp64LKFWavI2eMjn67B",
-    title: "Nervy Funk",
-    artist: "DJ KVNXD, Dj Zidzz, BRTS7, DJ ALGUS ZL",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fd9ab575a2d75303c5e5456e"
+    id: "31kPo3lHnFQ4nSdPEgYqHN",
+    title: "c u next tuesday",
+    artist: "Kesha",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e027a69a5f77ff60f79289024eb"
   },
 ];
 
 window.SONG_PINS = {
-  "2026-11-23": "4yxUp64LKFWavI2eMjn67B",
+  "2026-11-24": "31kPo3lHnFQ4nSdPEgYqHN",
 };
