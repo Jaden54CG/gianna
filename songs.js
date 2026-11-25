@@ -10,13 +10,13 @@
 
 window.SONGS = [
   {
-    id: "31kPo3lHnFQ4nSdPEgYqHN",
-    title: "c u next tuesday",
-    artist: "Kesha",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e027a69a5f77ff60f79289024eb"
+    id: "6o86CKQQc85ql8pMHrvJpo",
+    title: "Queen St",
+    artist: "twentythree",
+    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022aa000d976ef585fcd675b53"
   },
 ];
 
 window.SONG_PINS = {
-  "2026-11-24": "31kPo3lHnFQ4nSdPEgYqHN",
+  "2026-11-25": "6o86CKQQc85ql8pMHrvJpo",
 };
