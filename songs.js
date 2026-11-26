@@ -10,13 +10,13 @@
 
 window.SONGS = [
   {
-    id: "6o86CKQQc85ql8pMHrvJpo",
-    title: "Queen St",
-    artist: "twentythree",
-    cover: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022aa000d976ef585fcd675b53"
+    id: "3iKpHZWqkPuzYRUAOhz0To",
+    title: "Headlock",
+    artist: "Imogen Heap",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02646d96db3fdc0d2d4d8b2d57"
   },
 ];
 
 window.SONG_PINS = {
-  "2026-11-25": "6o86CKQQc85ql8pMHrvJpo",
+  "2026-11-26": "3iKpHZWqkPuzYRUAOhz0To",
 };
