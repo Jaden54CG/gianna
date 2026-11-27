@@ -10,13 +10,13 @@
 
 window.SONGS = [
   {
-    id: "3iKpHZWqkPuzYRUAOhz0To",
-    title: "Headlock",
-    artist: "Imogen Heap",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02646d96db3fdc0d2d4d8b2d57"
+    id: "47wq2z7KMHDRnoSMdZODUA",
+    title: "Something For Your M.I.N.D.",
+    artist: "Superorganism",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0215e40f96a2ce4c31e7106210"
   },
 ];
 
 window.SONG_PINS = {
-  "2026-11-26": "3iKpHZWqkPuzYRUAOhz0To",
+  "2026-11-27": "47wq2z7KMHDRnoSMdZODUA",
 };
