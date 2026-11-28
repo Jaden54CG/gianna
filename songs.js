@@ -10,13 +10,13 @@
 
 window.SONGS = [
   {
-    id: "47wq2z7KMHDRnoSMdZODUA",
-    title: "Something For Your M.I.N.D.",
-    artist: "Superorganism",
-    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0215e40f96a2ce4c31e7106210"
+    id: "7GOJJ7LsEePHTsI8mulxbW",
+    title: "Tokyo Drift X Gypsy Woman",
+    artist: "NovaX",
+    cover: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b4e084271aa33b8729160883"
   },
 ];
 
 window.SONG_PINS = {
-  "2026-11-27": "47wq2z7KMHDRnoSMdZODUA",
+  "2026-11-28": "7GOJJ7LsEePHTsI8mulxbW",
 };
